@@ -9,6 +9,13 @@ add_executable(mulan)
 target_sources(mulan
   PRIVATE main.c mulan.h
 )
+target_compile_options(mulan
+  PRIVATE
+    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
+      -Wall -Wextra -Werror -pedantic -Wno-missing-field-initializers>
+    $<$<CXX_COMPILER_ID:MSVC>:
+      /W2 /std:c11 /Zc:preprocessor->
+)
 
 
 # mulan library

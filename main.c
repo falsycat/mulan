@@ -176,7 +176,7 @@ _Noreturn void compile(const char* out, const char* in) {
           error("too long msgstr");
         }
 
-        char buf[MULAN_HDR];
+        uint8_t buf[MULAN_HDR];
         pack_header(buf, hash_n(msgid, msgid_len), (uint16_t) msgstr_len);
         if (fwrite(buf, sizeof(buf), 1, ofp) != 1) {
           error("header write error");
@@ -207,7 +207,7 @@ _Noreturn void read_bin(const char* in) {
   }
 
   for (;;) {
-    char hdr[10];
+    uint8_t hdr[10];
     if (!fread(hdr, sizeof(hdr), 1, fp)) break;
 
     uint64_t id;

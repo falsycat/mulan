@@ -27,8 +27,8 @@ int main(int argc, char** argv) {
     }
 
     for (;;) {
-      char hdr[MULAN_HDR];
-      input.read(hdr, sizeof(hdr));
+      uint8_t hdr[MULAN_HDR];
+      input.read(reinterpret_cast<char*>(hdr), sizeof(hdr));
       if (!input) break;
 
       uint64_t id;
