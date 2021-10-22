@@ -169,20 +169,22 @@ _Noreturn void compile(const char* out, const char* in) {
         append_quote_content(
             msgstr, &msgstr_len, sizeof(msgstr), line, line_len);
       } else {
-        unescape(msgid,  &msgid_len);
-        unescape(msgstr, &msgstr_len);
+        if (msgstr_len) {
+          unescape(msgid,  &msgid_len);
+          unescape(msgstr, &msgstr_len);
 
-        if (msgstr_len >= UINT16_MAX) {
-          error("too long msgstr");
-        }
+          if (msgstr_len >= UINT16_MAX) {
+            error("too long msgstr");
+          }
 
-        uint8_t buf[MULAN_HDR];
-        pack_header(buf, hash_n(msgid, msgid_len), (uint16_t) msgstr_len);
-        if (fwrite(buf, sizeof(buf), 1, ofp) != 1) {
-          error("header write error");
-        }
-        if (msgstr_len && fwrite(msgstr, msgstr_len, 1, ofp) != 1) {
-          error("body write error");
+          uint8_t buf[MULAN_HDR];
+          pack_header(buf, hash_n(msgid, msgid_len), (uint16_t) msgstr_len);
+          if (fwrite(buf, sizeof(buf), 1, ofp) != 1) {
+            error("header write error");
+          }
+          if (fwrite(msgstr, msgstr_len, 1, ofp) != 1) {
+            error("body write error");
+          }
         }
 
         msgid_len  = 0;
