@@ -33,7 +33,7 @@ function(add_mulan out in)
 
   add_custom_command(
     OUTPUT  "${dst}"
-    DEPENDS "${src}"
+    DEPENDS "${src}" mulan
     COMMAND $<TARGET_FILE:mulan> compile "${dst}" "${src}"
     COMMENT "compiling ${in}..."
     VERBATIM
