@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr ""
+msgstr "\xA1"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-22 22:20+0900\n"
@@ -25,3 +25,6 @@ msgstr "こんにちは世界！！！！！"
 #: main.cc:46
 msgid "MULAN provides a easy way to support i18n"
 msgstr "MULANを使えばソフトウェアの国際化を簡単に行うことができます！(多分)"
+
+msgid "empty"
+msgstr ""

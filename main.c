@@ -40,15 +40,15 @@ void append_quote_content(
 
 uint8_t to_hex(char c) {
   if ('0' <= c && c <= '9') return c-'0';
-  if ('A' <= c && c <= 'F') return c-'A';
-  if ('a' <= c && c <= 'f') return c-'a';
+  if ('A' <= c && c <= 'F') return c-'A'+0xA;
+  if ('a' <= c && c <= 'f') return c-'a'+0xA;
   error("invalid hex char");
 }
 
 uint8_t parse_hex(char h, char l) {
-  const int8_t high = to_hex(h);
-  const int8_t low  = to_hex(l);
-  return (high << 4) & low;
+  const uint8_t high = to_hex(h);
+  const uint8_t low  = to_hex(l);
+  return (high << 4) | low;
 }
 
 void unescape(char* str, size_t* n) {
@@ -181,7 +181,7 @@ _Noreturn void compile(const char* out, const char* in) {
         if (fwrite(buf, sizeof(buf), 1, ofp) != 1) {
           error("header write error");
         }
-        if (fwrite(msgstr, msgstr_len, 1, ofp) != 1) {
+        if (msgstr_len && fwrite(msgstr, msgstr_len, 1, ofp) != 1) {
           error("body write error");
         }
 
