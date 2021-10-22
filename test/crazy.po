@@ -1,0 +1,7 @@
+#: main.cc:45
+msgid "Hello World!!"
+msgstr "あびゃびゃびゃびゃ"
+
+#: main.cc:46
+msgid "MULAN provides a easy way to support i18n"
+msgstr "あひゃひゃひゃひゃひゃひゃひゃ"
