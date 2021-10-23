@@ -10,13 +10,14 @@ MULAN compiles `*.po` file into a simple-formatted binary data.
 ```
 $ cat in
 msgid  "Hello World"
-msgstr "こんにちは世界"
+msgstr ":fa5_cat:こんにちは世界:fa5_cat:"
 
-$ mulan compile out in
+$ mulan compile --output out --icon fontawesome5 in
 
 $ xxd out
-00000000: 6c08 093a 6f57 206f 1500 e381 93e3 8293  l..:oW o........
-00000010: e381 abe3 81a1 e381 afe4 b896 e795 8c    ...............
+00000000: 6c08 093a 6f57 206f 1b00 ef9a bee3 8193  l..:oW o........
+00000010: e382 93e3 81ab e381 a1e3 81af e4b8 96e7  ................
+00000020: 958c ef9a be
 ```
 
 The compiled binary is formatted as below.
