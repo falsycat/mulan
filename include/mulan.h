@@ -37,7 +37,9 @@ static inline MULAN_CONSTEXPR_ uint64_t hash_n(const char* str, size_t n) {
   return ret;
 }
 static inline MULAN_CONSTEXPR_ uint64_t hash(const char* str) {
-  return hash_n(str, strlen(str));
+  size_t i = 0;
+  while (str[i]) ++i;
+  return hash_n(str, i);
 }
 
 static inline void unpack_header(
