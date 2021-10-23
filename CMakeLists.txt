@@ -4,26 +4,27 @@ project(mulan)
 option(MULAN_BUILD_TEST "build test app" OFF)
 
 
+# mulan library
+add_library(libmulan INTERFACE)
+target_sources(libmulan
+  INTERFACE include/mulan.h
+)
+target_include_directories(libmulan INTERFACE include)
+
+
 # mulan compiler
 add_executable(mulan)
+target_link_libraries(mulan PRIVATE libmulan)
 target_sources(mulan
-  PRIVATE main.c mulan.h
+  PRIVATE main.cc icon.h
 )
 target_compile_options(mulan
   PRIVATE
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
-      -Wall -Wextra -Werror -pedantic -Wno-missing-field-initializers>
+      -Wall -Werror -pedantic-errors -Wextra -Wconversion -Wsign-conversion>
     $<$<CXX_COMPILER_ID:MSVC>:
-      /W2 /std:c11 /Zc:preprocessor->
+      /W4 /WX>
 )
-
-
-# mulan library
-add_library(libmulan INTERFACE)
-target_sources(libmulan
-  INTERFACE mulan.h
-)
-target_include_directories(libmulan INTERFACE .)
 
 
 # add_mulan CMake function
@@ -34,7 +35,7 @@ function(add_mulan out in)
   add_custom_command(
     OUTPUT  "${dst}"
     DEPENDS "${src}" mulan
-    COMMAND $<TARGET_FILE:mulan> compile "${dst}" "${src}"
+    COMMAND $<TARGET_FILE:mulan> compile --output "${dst}" --icon fontawesome5 "${src}"
     COMMENT "compiling ${in}..."
     VERBATIM
   )
