@@ -1,4 +1,4 @@
-// No copyright
+// Each mapping data is from an external project protected by different license.
 #pragma once
 
 #include <string>
@@ -9,6 +9,8 @@ static const std::unordered_set<std::string> kAvailableIcons = {
   "fontawesome5",
 };
 
+// The following map data for FontAwesome5 is from https://github.com/juliettef/IconFontCppHeaders,
+// which is licensed under zlib.
 static const std::unordered_map<std::string, std::string> kIconMap_FontAwesome5 = {
   { "fa5_ad",                                  "\xef\x99\x81" },
   { "fa5_address_book",                        "\xef\x8a\xb9" },
